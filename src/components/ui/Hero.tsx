@@ -17,7 +17,7 @@ export default function Hero({ className }: { className?: string }) {
           <div className="photo">
             <Avatar className="size-20 rounded-none">
               <Avatar.Image
-                src="src/assets/photo-andres-vizcaino.webp"
+                src="/photo-andres-vizcaino.webp"
                 alt="Foto de Andrés Vizcaíno"
               />
               <Avatar.Fallback className="rounded-none bg-muted/30">
