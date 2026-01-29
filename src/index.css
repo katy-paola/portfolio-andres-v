@@ -40,7 +40,6 @@ html {
 }
 
 :root {
-  --radius: 0;
   --background: #fff;
   --foreground: #000;
   --card: #fff;
@@ -85,42 +84,109 @@ html {
 
 .frame-wrapper {
   position: relative;
-  width: 80px;
-  height: 150px;
+  aspect-ratio: 1 / 1;
   margin-inline: 24px;
+  perspective: 1000px;
 }
 
 .swing-group {
   position: absolute;
   top: 0;
   left: 50%;
+  width: 100%;
+  height: 100%;
   transform: translateX(-50%);
-  transform-origin: top;
-  animation: swing 1.5s ease-out forwards;
+  transform-origin: top center;
+  will-change: transform;
 }
 
 .string {
   width: 2px;
-  height: 60px;
-  background: black;
+  height: 40%;
+  background: linear-gradient(to bottom, #1a1a1a 0%, #4a4a4a 100%);
   margin: 0 auto;
+  box-shadow: 1px 0 2px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.string::before {
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  background: #333;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
 .photo {
+  width: 100%;
+  height: 100%;
   border: 10px solid white;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 8px 24px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.2);
   margin-top: -10px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
 }
 
-/* NATURAL SWING */
-@keyframes swing {
-  0% {
-    transform: translateX(-50%) rotate(8deg);
-  }
-  50% {
-    transform: translateX(-50%) rotate(-4deg);
-  }
-  100% {
-    transform: translateX(-50%) rotate(0deg);
-  }
+.photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo .fallback {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.05);
+  font-weight: 600;
+  color: #666;
+  font-size: clamp(1rem, 4vw, 1.5rem);
+}
+
+.photo::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.05) 100%
+  );
+  pointer-events: none;
+}
+
+/* STACK */
+
+.cards-stacked > * {
+  grid-area: 1 / 1 / span 1 / span 1;
+}
+.card-offset-1 {
+  transform: translateX(0px) translateY(0px);
+}
+.card-offset-2 {
+  transform: translateX(16px) translateY(16px);
+}
+.card-offset-3 {
+  transform: translateX(32px) translateY(32px);
+}
+.card-offset-4 {
+  transform: translateX(48px) translateY(48px);
 }
