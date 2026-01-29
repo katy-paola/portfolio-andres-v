@@ -31,7 +31,7 @@ export default function OtherProjects({ className }: { className?: string }) {
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="p-0">
-                  <div className="flex flex-wrap gap-1">
+                  <div className="flex flex-wrap gap-2">
                     {project.stack.map((tool, toolIndex) => (
                       <Badge key={toolIndex} variant={"surface"} size={"sm"}>
                         {tool}
